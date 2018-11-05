@@ -74,5 +74,58 @@ c[2]
 c[[2]][1]
 c
 
+df
+df[df$measure2>86 & df$value<=1,]
 
+# add a new column based on the products of two others
+df$new_col <- df$measure1 * df$measure2
+df
 
+# query data using a keyword e.g. 'a' (quite simple) for the ID column
+df[grep("a", df$ID, ignore.case=T),]
+
+# order values
+ordered(df$ID)
+
+# binary
+x1 <- rbinom(10,size=1,prob=0.5)
+x2 <- factor(x1,labels=c("yes","no"))
+summary(x2)
+levels(x2)
+as.character(x2)
+
+install.packages("car")
+library("car")
+recode(x2,"'yes'='sure';'no'='maybe'")
+
+# steigerwald data
+
+df[,2]
+
+# Task
+
+#Just plot SRTM values above a predefined NDVI value
+#Just plot NDVI values for SRTM values less than Y and landcover equal to X
+#create a new data frame with all entries but only corresponding NDVI values above 0.5
+#select data where LC values below x or above y
+
+# df to SPDF
+spdf.obj <- df
+names(spdf)
+install.packages("sp")
+library("sp")
+coordinates(spdf.obj) <- ~x+y
+plot(spdf.obj)
+
+# save as shapefile
+install.packages("rgdal")
+library("rgdal")
+writeOGR(spdf.obj,"sample_point_with_data",driver="ESRI Shapefile","data")
+
+# export only certain parts of the data
+# only column L8.ndvi as a vector of values
+l8_ndvi <- df[,c('L8.ndvi'>0.5)]
+
+# only altitude higher 350
+higher_350 <- df[df$SRTM>=350,]
+ndvi_higher0.6 <- higher_350[higher_350$L8.ndvi>=0.6,]
