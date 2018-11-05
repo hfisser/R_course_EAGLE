@@ -123,9 +123,26 @@ library("rgdal")
 writeOGR(spdf.obj,"sample_point_with_data",driver="ESRI Shapefile","data")
 
 # export only certain parts of the data
-# only column L8.ndvi as a vector of values
-l8_ndvi <- df[,c('L8.ndvi'>0.5)]
 
-# only altitude higher 350
-higher_350 <- df[df$SRTM>=350,]
-ndvi_higher0.6 <- higher_350[higher_350$L8.ndvi>=0.6,]
+# only SRTM altitude>=350 and Landsat8-NDVI>=0.6
+L8ndvi_mask_altitude_higher_350 <- df[df$SRTM>=350&df$L8.ndvi>=0.6,]
+
+# all entries but only NDVI values above 0.5
+NDVI_higher0.5 <- df[df$L8.ndvi>0.5,]
+
+# NDVI values for SRTM altitude<300 and LC is cropland
+# only lower 300m
+mask1 <- df[df$SRTM<300,]
+# only cropland!
+mask2 <- mask1[grep('cropland',mask1$LCname,ignore.case=T),]
+# only NDVI values and coordinates
+NDVI_mask <- mask2[,c('L8.ndvi','x','y')]
+# now export this for display in QGIS
+coordinates(NDVI_mask) <- ~x+y
+writeOGR(NDVI_mask,"NDVI_mask",driver="ESRI Shapefile","data")
+
+# reimport the shapefile into R
+reimport_NDVI_mask <- readOGR(".","data")
+test <- reimport_NDVI_mask
+# convert it back to dataframe
+df_NDVI_mask <- as.data.frame(reimport_NDVI_mask)
