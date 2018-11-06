@@ -142,7 +142,22 @@ coordinates(NDVI_mask) <- ~x+y
 writeOGR(NDVI_mask,"NDVI_mask",driver="ESRI Shapefile","data")
 
 # reimport the shapefile into R
-reimport_NDVI_mask <- readOGR(".","data")
-test <- reimport_NDVI_mask
+import <- readOGR("spdf_NDVI_mask","data")
 # convert it back to dataframe
-df_NDVI_mask <- as.data.frame(reimport_NDVI_mask)
+df_NDVI_mask <- as.data.frame(import)
+
+# just select LUCAS_LC and SRTM where NDVI larger equal than x
+NDVI_mask1 <- df[df$L8.ndvi>=0.6,]
+SRTM_LUCAS_LC <- NDVI_mask1[,c('SRTM','LUCAS_LC','x','y')]
+coordinates(SRTM_LUCAS_LC) <- ~x+y
+writeOGR(SRTM_LUCAS_LC,"SRTM_LUC_LC",driver="ESRI Shapefile","data")
+#reimport the shapefile into R
+import <- readOGR("SRTM_LUC_LC","data")
+
+# from r tutorial ... try this
+#crs.geo <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84")  # geographical, datum WGS84
+#proj4string(locs) <- crs.geo  # define projection system of our data
+#summary(locs)
+
+
+
