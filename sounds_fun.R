@@ -20,10 +20,6 @@ if("Frederik" %in% members) {
 } else { skrrrahh(50)
 }
 
-for(i %in% 1:10) {
-  skrrrahh(i)
-}
-
 skrrrahh(33)
 skrrrahh_list()
 
