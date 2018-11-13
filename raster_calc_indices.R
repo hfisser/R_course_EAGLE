@@ -31,7 +31,7 @@ levelplot(ndvi_LT05, at=breaks, col.regions=cols)
 # calculate ndvi using RStoolbox
 library(RStoolbox)
 ndvi_RStoolbox <- spectralIndices(stack,green="LT05_L1TP_170059_19950402_20170108_01_T1_B2",red="LT05_L1TP_170059_19950402_20170108_01_T1_B3",nir="LT05_L1TP_170059_19950402_20170108_01_T1_B4",indices="NDVI",scaleFactor=1,skipRefCheck=FALSE)
-ndvi_RStoolbox
+plot(ndvi_RStoolbox)
 
 # savi
 SAVIcalc <- function(b4,b3){

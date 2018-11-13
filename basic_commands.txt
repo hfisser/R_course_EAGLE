@@ -1,0 +1,9 @@
+# remove everything from workspace
+rm(list=ls())
+
+# next line in a dataframe: 
+\n@
+
+# print a plot in a new windows window
+x11()
+
