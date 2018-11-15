@@ -32,4 +32,4 @@ ndvi <- df$L7.ndvi
 
 frame()
 
-plot(lucas,ndvi)
+df
