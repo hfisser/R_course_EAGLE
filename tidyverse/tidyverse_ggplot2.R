@@ -1,5 +1,4 @@
-## get tidyverse
-## it includes 8 different packages. 
+## tidyverse includes 8 different packages. 
 ## you find an overview here: https://www.tidyverse.org/packages/
 ## you can also load only a single package from tidyverse
 
