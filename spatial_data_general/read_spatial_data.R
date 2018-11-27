@@ -16,3 +16,5 @@ temp1 <- readOGR("SRTM_LUC_LC","data")
 import1 <- as.data.frame(temp1)
 
 tiff <- raster("E:\\LT05_L1TP_170059_19950402_20170108_01_T1","LT05_L1TP_170059_19950402_20170108_01_T1_B2.tiff")
+
+

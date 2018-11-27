@@ -38,4 +38,3 @@ SAVIcalc <- function(b4,b3){
   return(((b4-b3)/(b4+b3+0.5))*(1+0.5))
 }
 
-

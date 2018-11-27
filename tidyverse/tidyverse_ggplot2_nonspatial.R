@@ -89,6 +89,49 @@ ggplot(df,aes(a,b, color=c))+
   geom_point()+
   labs(title="hello guys",x="x axis \n and a new line")
 # create a histogram
-ggplot(df,aes(a))+geom_histogram(color="white")
+ggplot(df,aes(c,fill=d))+
+  geom_density(alpha=0.5)
 
-#
+ggplot(df)+
+  geom_histogram(aes(a,..density..),fill="blue",colour="darkgrey")+
+  geom_density(aes(a,..density..),colour="yellow")+
+  geom_rug(aes(a))
+
+ggplot(df,aes(c,coolor=c))+
+  geom_point(stat="count",size=6,alpha=.5)+
+  scale_color_grey()
+
+ggplot(df,aes(d,a))+
+  geom_boxplot()+
+  geom_jitter(alpha=.5,width=.25,color="blue") # for the distribution of the data
+
+ggplot(df,aes(c))+
+  geom_bar()+facet_grid(d~.)
+
+ggplot(df,aes(a,b))+
+  geom_point(size=1)+
+  geom_density2d()
+
+ggplot(df,aes(a,b))+
+  geom_hex(bins=30)
+
+# there a number of other gg visualizations
+#"ggridges","ggquiver","ggdag","ggTimeSeries",...
+
+# another plot
+ggplot(df,aes(x=L8.ndvi,y=L8.savi,colour=SRTM))+geom_point()
+ggplot(df,aes(x=L8.ndvi,y=L8.savi,colour=SRTM))+
+  geom_point()+
+  geom_smooth()+
+  facet_wrap(~LCname)
+
+# another plot
+s1 <- mean(df$S2.1)
+s2 <- mean(df$S2.2)
+s3 <- mean(df$S2.3)
+s4 <- mean(df$S2.4)
+s <- c(s1,s2,s3,s4)
+b <- c("b1","b2","b3","b4")
+d <- data.frame(s,b)
+ggplot(d,aes(x=b,y=s,group=1))+geom_path()
+

@@ -11,5 +11,3 @@ df_edit <- df[c("L7.ndvi","L8.ndvi","LCname")]
 df_gathered <- df_edit %>%
   gather(L7.ndvi,L8.ndvi,key=Sensor,value=Lt_ndvi)
 View(df_gathered)
-
-

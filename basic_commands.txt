@@ -7,4 +7,6 @@ rm(list=ls())
 # print a plot in a new windows window
 x11()
 
+# twitter
+library(rTweet)
 
